@@ -9,7 +9,7 @@ VENDEDOR_API_URL = "https://parapisos-autoatendimento-vendedores.onrender.com/pr
 
 def send_message(phone, message):
     # URL correta para enviar mensagens
-    url = "https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/B2A86CA33AF419BB356CE4BD/send-text"
+    url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/{ZAPI_TOKEN}/send-text"
     
     headers = {
         "Authorization": f"Bearer {ZAPI_TOKEN}",
@@ -20,6 +20,9 @@ def send_message(phone, message):
         "phone": phone,
         "message": message
     }
+    
+    # Exibe o corpo da requisição para depuração
+    print(f"Enviando para a API Z-API: {data}")
     
     # Envia a requisição para a API do Z-API
     response = requests.post(url, json=data, headers=headers)
