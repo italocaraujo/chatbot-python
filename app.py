@@ -18,7 +18,11 @@ def send_message(phone, message):
         "message": message
     }
     response = requests.post(url, json=data, headers=headers)
-    return response.status_code == 200
+    if response.status_code == 200:
+        return True
+    else:
+        print("Erro ao enviar a mensagem:", response.text)
+        return False
 
 def get_proximo_vendedor():
     try:
