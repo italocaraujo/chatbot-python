@@ -17,12 +17,19 @@ def send_message(phone, message):
         "phone": phone,
         "message": message
     }
+    
+    # Envia a requisição para a API do Z-API
     response = requests.post(url, json=data, headers=headers)
+    
+    # Exibe a resposta da API para depuração
+    print(f"Resposta da API Z-API: {response.status_code} - {response.text}")
+    
+    # Verifica se o envio foi bem-sucedido
     if response.status_code == 200:
         print(f"Mensagem enviada para {phone}: {message}")
         return True
     else:
-        print("Erro ao enviar a mensagem:", response.text)
+        print(f"Erro ao enviar a mensagem para {phone}: {response.text}")
         return False
 
 def get_proximo_vendedor():
