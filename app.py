@@ -35,32 +35,42 @@ def get_proximo_vendedor():
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-    data = request.json
-    message = data.get("message", "").strip()
-    phone = data.get("phone")
+    try:
+        data = request.json
+        print("Dados recebidos do Z-API:", data)  # Log para verificar o que foi recebido
 
-    if not phone or not message:
-        return jsonify({"error": "Dados inválidos"}), 400
+        message = data.get("message", "").strip()
+        phone = data.get("phone")
 
-    if message == "1":
-        vendedor = get_proximo_vendedor()
-        if vendedor:
-            send_message(phone, f"Você será atendido por {vendedor['nome']}.\nChame ele no WhatsApp: https://wa.me/{vendedor['numero']}")
+        # Verificar se os dados essenciais estão presentes
+        if not phone or not message:
+            print("Erro: Dados inválidos (falta de telefone ou mensagem).")
+            return jsonify({"error": "Dados inválidos"}), 400
+
+        # Processar a mensagem com base no conteúdo recebido
+        if message == "1":
+            vendedor = get_proximo_vendedor()
+            if vendedor:
+                send_message(phone, f"Você será atendido por {vendedor['nome']}.\nChame ele no WhatsApp: https://wa.me/{vendedor['numero']}")
+            else:
+                send_message(phone, "Nenhum vendedor disponível no momento. Tente novamente mais tarde.")
+        elif message == "2":
+            send_message(phone, "Aqui está o link para ver nossos produtos: https://parapisos.vercel.app/")
+        elif message == "3":
+            send_message(phone, "Nosso suporte técnico está online. Em que posso ajudar?")
         else:
-            send_message(phone, "Nenhum vendedor disponível no momento. Tente novamente mais tarde.")
-    elif message == "2":
-        send_message(phone, "Aqui está o link para ver nossos produtos: https://parapisos.vercel.app/")
-    elif message == "3":
-        send_message(phone, "Nosso suporte técnico está online. Em que posso ajudar?")
-    else:
-        send_message(phone,
-            "Olá! Como posso te ajudar?\n\n"
-            "1 - Falar com um vendedor\n"
-            "2 - Ver produtos\n"
-            "3 - Suporte técnico"
-        )
+            send_message(phone,
+                "Olá! Como posso te ajudar?\n\n"
+                "1 - Falar com um vendedor\n"
+                "2 - Ver produtos\n"
+                "3 - Suporte técnico"
+            )
+        
+        return jsonify({"status": "ok"})
     
-    return jsonify({"status": "ok"})
+    except Exception as e:
+        print(f"Erro no processamento do webhook: {e}")
+        return jsonify({"error": "Erro interno do servidor"}), 500
 
 if __name__ == "__main__":
     app.run(port=5000)
