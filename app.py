@@ -32,6 +32,7 @@ def send_message(phone, message):
         print(f"Erro ao enviar a mensagem para {phone}: {response.text}")
         return False
 
+
 def get_proximo_vendedor():
     try:
         response = requests.get(VENDEDOR_API_URL)
