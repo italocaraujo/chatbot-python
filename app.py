@@ -19,6 +19,7 @@ def send_message(phone, message):
     }
     response = requests.post(url, json=data, headers=headers)
     if response.status_code == 200:
+        print(f"Mensagem enviada para {phone}: {message}")
         return True
     else:
         print("Erro ao enviar a mensagem:", response.text)
