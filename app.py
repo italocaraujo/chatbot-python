@@ -8,11 +8,14 @@ ZAPI_TOKEN = "6D2C25339E8916305438B2A9"
 VENDEDOR_API_URL = "https://parapisos-autoatendimento-vendedores.onrender.com/proximo-vendedor"
 
 def send_message(phone, message):
-    url = f"{ZAPI_URL}/send-message"
+    # URL correta para enviar mensagens
+    url = "https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/6D2C25339E8916305438B2A9/send-text"
+    
     headers = {
         "Authorization": f"Bearer {ZAPI_TOKEN}",
         "Content-Type": "application/json"
     }
+    
     data = {
         "phone": phone,
         "message": message
@@ -20,7 +23,7 @@ def send_message(phone, message):
     
     # Envia a requisição para a API do Z-API
     response = requests.post(url, json=data, headers=headers)
-    
+
     # Exibe a resposta da API para depuração
     print(f"Resposta da API Z-API: {response.status_code} - {response.text}")
     
@@ -31,7 +34,6 @@ def send_message(phone, message):
     else:
         print(f"Erro ao enviar a mensagem para {phone}: {response.text}")
         return False
-
 
 def get_proximo_vendedor():
     try:
