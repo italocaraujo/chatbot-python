@@ -4,15 +4,15 @@ import requests
 app = Flask(__name__)
 
 ZAPI_URL = "https://api.z-api.io/3E0DAD8E4FABF012B6D596870211A73F"
-ZAPI_TOKEN = "F8ff57ac63ad34103be33e8b72d69a8d5S"
+ZAPI_TOKEN = "B2A86CA33AF419BB356CE4BD"
 VENDEDOR_API_URL = "https://parapisos-autoatendimento-vendedores.onrender.com/proximo-vendedor"
 
 def send_message(phone, message):
     # URL correta para enviar mensagens
-    url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/{ZAPI_TOKEN}/send-text"
+    url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/B2A86CA33AF419BB356CE4BD/send-text"
     
     headers = {
-        "Authorization": f"Bearer {ZAPI_TOKEN}",
+        "Authorization": f"Bearer F8ff57ac63ad34103be33e8b72d69a8d5S",
         "Content-Type": "application/json"
     }
     
