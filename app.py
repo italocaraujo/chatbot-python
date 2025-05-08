@@ -12,7 +12,7 @@ def send_message(phone, message):
     url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/B2A86CA33AF419BB356CE4BD/send-text"
     
     headers = {
-        "Authorization": f"Bearer {ZAPI_TOKEN}",
+        "Authorization": f"Bearer B2A86CA33AF419BB356CE4BD",
         "Content-Type": "application/json"
     }
     
