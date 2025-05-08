@@ -9,10 +9,10 @@ VENDEDOR_API_URL = "https://parapisos-autoatendimento-vendedores.onrender.com/pr
 
 def send_message(phone, message):
     # URL correta para enviar mensagens
-    url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/B2A86CA33AF419BB356CE4BD/send-text"
+    url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/{ZAPI_TOKEN}/send-text"
     
     headers = {
-        "Authorization": f"Bearer F8ff57ac63ad34103be33e8b72d69a8d5S",
+        "Authorization": f"Bearer F8ff57ac63ad34103be33e8b72d69a8d5S", 
         "Content-Type": "application/json"
     }
     
