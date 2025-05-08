@@ -8,11 +8,21 @@ ZAPI_TOKEN = "B2A86CA33AF419BB356CE4BD"
 VENDEDOR_API_URL = "https://parapisos-autoatendimento-vendedores.onrender.com/proximo-vendedor"
 
 def send_message(phone, message):
+    # Verificar se os dados essenciais estão presentes
+    if not phone or not message:
+        print("Erro: Dados inválidos (falta de telefone ou mensagem).")
+        return False
+
+    # Se for um número de grupo, precisamos lidar com isso corretamente.
+    if "group" in phone:
+        print(f"Mensagem não pode ser enviada para grupos. Número recebido: {phone}")
+        return False
+    
     # URL correta para enviar mensagens
     url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/{ZAPI_TOKEN}/send-text"
     
     headers = {
-        "Authorization": f"Bearer F8ff57ac63ad34103be33e8b72d69a8d5S", 
+        "Authorization": f"Bearer F8ff57ac63ad34103be33e8b72d69a8d5S",  # Token de autenticação no cabeçalho
         "Content-Type": "application/json"
     }
     
