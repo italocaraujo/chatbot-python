@@ -4,16 +4,15 @@ import requests
 app = Flask(__name__)
 
 ZAPI_URL = "https://api.z-api.io/3E0DAD8E4FABF012B6D596870211A73F"
-ZAPI_TOKEN = "B2A86CA33AF419BB356CE4BD"
+ZAPI_TOKEN = "B2A86CA33AF419BB356CE4BD"  # O token agora será parte da URL
 VENDEDOR_API_URL = "https://parapisos-autoatendimento-vendedores.onrender.com/proximo-vendedor"
 
 def send_message(phone, message):
-    # URL correta para enviar mensagens
+    # URL com o Client-Token diretamente na URL
     url = f"https://api.z-api.io/instances/3E0DAD8E4FABF012B6D596870211A73F/token/{ZAPI_TOKEN}/send-text"
     
     headers = {
-        "Authorization": f"Bearer {ZAPI_TOKEN}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json"  # Não precisamos mais do Bearer Token no cabeçalho
     }
     
     data = {
